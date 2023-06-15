@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+ id String @id @default(uuid())
+ name String
+ email String
+ password String
+ created_at DateTime? @default(now())
+ updated_at DateTime? @default(now())
+ @@map("users")
+}
+model Order {
+ id String @id @default(uuid())
+ prato String
+ mesa String
+ created_at DateTime? @default(now())
+ updated_at DateTime? @default(now())
+ @@map("order")
+}
+model Menu {
+ id String @id @default(uuid())
+ name String
+ price String
+ created_at DateTime? @default(now())
+ updated_at DateTime? @default(now())
+ @@map("order")
+}
+model Reservation {
+ id String @id @default(uuid())
+ name String
+ date String
+ time String
+ created_at DateTime? @default(now())
+ updated_at DateTime? @default(now())
+ @@map("order")
+}
