@@ -59,23 +59,23 @@ class ReservaService {
     }
     async consultarReservasPorData(data: string) {
         const reservas = await prismaClient.reserva.findMany({
-            where: {
-                data: {
-                    gte: new Date(data),
-                },
+          where: {
+            data: {
+              gte: new Date(data),
             },
-            select: {
-                id: true,
-                nomeCliente: true,
-                cpf: true,
-                data: true,
-                hora: true,
-                mesaReservada: true,
-            },
+          },
+          select: {
+            id: true,
+            nomeCliente: true,
+            cpf: true,
+            data: true,
+            hora: true,
+            mesaReservada: true,
+          },
         });
-
+    
         return reservas;
-    }
+      }
 }
 
 export { ReservaService };

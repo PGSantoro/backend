@@ -1,13 +1,13 @@
 import { Router, Request, Response } from "express";
-import { AuthUserController } from "./controllers/user/AuthUserController";
-import { CreateUserController } from "./controllers/user/CreateUserController";
-import { CardapioController } from "./controllers/menu/CardapioController";
-import { PedidosController } from "./controllers/order/TodosPedidosController";
-import { NewPedidoController } from "./controllers/order/NovoPedidoController";
-import { PedidosMesaController } from "./controllers/order/PedidoMesaController";
-import { PagamentoComandaController } from "./controllers/comanda/EfetuarPagamentoController";
-import { ComandaController } from "./controllers/comanda/ComandasPagasController";
-import { ReservaController } from "./controllers/wait/ReservaController";
+import { AuthUserController } from "./Controllers/user/AuthUserController";
+import { CreateUserController } from "./Controllers/user/CreateUserController";
+import { CardapioController } from "./Controllers/cardapio/CardapioController";
+import { PedidosController } from "./Controllers/pedidos/TodosPedidosController";
+import { NewPedidoController } from "./Controllers/pedidos/NovoPedidoController";
+import { PedidosMesaController } from "./Controllers/pedidos/PedidoMesaController";
+import { PagamentoComandaController } from "./Controllers/comanda/EfetuarPagamentoController";
+import { ComandaController } from "./Controllers/comanda/ComandasPagasController";
+import { ReservaController } from "./Controllers/reserva/ReservaController";
 
 
 const router = Router();
