@@ -2,45 +2,49 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+ provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+ provider = "mysql"
+ url = env("DATABASE_URL")
 }
+
+//para criar a tabela(Migration): npx prisma migrate dev
 
 model User {
  id String @id @default(uuid())
- name String
+ nome String
  email String
- password String
- created_at DateTime? @default(now())
- updated_at DateTime? @default(now())
+ senha String
  @@map("users")
 }
-model Order {
+
+model Cardapio {
  id String @id @default(uuid())
- prato String
- mesa String
- created_at DateTime? @default(now())
- updated_at DateTime? @default(now())
- @@map("order")
+ sabor String
+ ingredientes String
+ valor Float
+ @@map("cardapio")
 }
-model Menu {
+
+model Comanda {
  id String @id @default(uuid())
- name String
- price String
- created_at DateTime? @default(now())
- updated_at DateTime? @default(now())
- @@map("order")
+ mesa Int
+ pizzas String
+ valorTotal Float
+ estadoPronto Boolean
+ estadoEntregue Boolean
+ pagamento Boolean
+ @@map("comanda")
 }
-model Reservation {
- id String @id @default(uuid())
- name String
- date String
- time String
- created_at DateTime? @default(now())
- updated_at DateTime? @default(now())
- @@map("order")
+
+model Reserva {
+id String @id @default(uuid())
+nomeCliente String
+cpf String
+data DateTime
+hora String
+mesaReservada Int
+@@map("reserva")
 }

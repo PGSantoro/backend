@@ -1,31 +1,47 @@
-import { Router, Request, Response } from 'express';
+import { Router, Request, Response } from "express";
+import { AuthUserController } from "./controllers/user/AuthUserController";
 import { CreateUserController } from "./controllers/user/CreateUserController";
-import { CreateOrderController } from "./controllers/order/CreateOrderController";
-import { MenuController } from "./controllers/menu/MenuController";
-import { CreateReservationController } from "./controllers/reservation/CreateReservationController";
+import { CardapioController } from "./controllers/menu/CardapioController";
+import { PedidosController } from "./controllers/order/TodosPedidosController";
+import { NewPedidoController } from "./controllers/order/NovoPedidoController";
+import { PedidosMesaController } from "./controllers/order/PedidoMesaController";
+import { PagamentoComandaController } from "./controllers/comanda/EfetuarPagamentoController";
+import { ComandaController } from "./controllers/comanda/ComandasPagasController";
+import { ReservaController } from "./controllers/wait/ReservaController";
+
 
 const router = Router();
+const cardapioController = new CardapioController();
+const pedidosController = new PedidosController();
+const newPedidoController = new NewPedidoController();
+const pedidosMesaController = new PedidosMesaController();
+const pagamentoComandaController = new PagamentoComandaController();
+const comandaController = new ComandaController();
+const reservaController = new ReservaController();
 
-router.get('/teste', (req: Request, res: Response) => {
-    return res.json({ ok: "Fechou" });
-});
 
-// Rota da página Home
-router.get('/', (req: Request, res: Response) => {
-    // Lógica para retornar as informações da página Home
-    return res.json('Bem-vindo à pizzaria!');
-});
 
-// Rota para criar um novo usuário
-router.post('/users', new CreateUserController().handle);
 
-// Rota para criar um novo pedido
-router.post('/order', new CreateOrderController().handle);
+//Rotas User ------------
+router.post('/appetito/userinsert', new CreateUserController().handle);
+router.post('/appetito/login', new AuthUserController().handle);
 
-// Rota para obter o cardápio
-router.get('/menu', new MenuController().handle);
+//Rotas Cardapio ------------
+router.get('/appetito/cardapio', cardapioController.getCardapio);
 
-// Rota para criar uma nova reserva
-router.post('/reservas', new CreateReservationController().handle);
+//Rotas Pedidos ------------
+router.get('/appetito/pedidos', pedidosController.getPedidos);
+router.post("/appetito/pedidos", newPedidoController.createPedido);
+router.get("/appetito/pedidos/:mesa", pedidosMesaController.getPedidoPorMesa);
+
+//Rotas Comanda ------------
+router.put("/appetito/comandas/:id/efetuarPagamento", pagamentoComandaController.efetuarPagamento);
+router.get("/appetito/comandas/pagas", comandaController.getComandasPagas);
+
+//Rotas Reservas ------------
+router.post("/appetito/reserva", reservaController.criarReserva);
+router.delete("/appetito/reserva/:id", reservaController.deletarReserva);
+router.get("/appetito/reserva/cpf", reservaController.consultarReservaPorCPF);
+router.get("/appetito/reserva", reservaController.consultarReservas);
 
 export { router };
